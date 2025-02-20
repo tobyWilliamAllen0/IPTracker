@@ -3,6 +3,8 @@ import MobileBG from '../images/pattern-bg-mobile.png';
 import Arrow from '../images/icon-arrow.svg';
 import { useLoaderData } from '@remix-run/react';
 import { useMemo } from 'react';
+import { Map } from '../components/Map.client';
+import { ClientOnly } from '../components/client-only';
 
 export const meta: MetaFunction = () => {
 	return [
@@ -80,7 +82,23 @@ export default function Index() {
 				</div>
 			</header>
 
-			<main className="w-full h-[70%] z-0 relative"></main>
+			<main className="w-full h-[70%] z-0 relative">
+				<ClientOnly
+					fallback={
+						<div
+							id="skeleton"
+							style={{ height: '100%', background: '#d1d1d1' }}
+						/>
+					}
+				>
+					{() => (
+						<Map
+							height="100%"
+							initialPosition={[data?.location?.lat, data?.location?.lng]}
+						/>
+					)}
+				</ClientOnly>
+			</main>
 		</div>
 	);
 }
