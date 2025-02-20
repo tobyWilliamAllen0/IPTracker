@@ -1,5 +1,7 @@
 require('dotenv').config();
 
 module.exports = {
-	// Your existing configuration
+	deployment: {
+        target: 'vercel', // Set target to Vercel
+    },
 };

@@ -16,12 +16,12 @@ export const meta: MetaFunction = () => {
 
 export const loader: LoaderFunction = async () => {
 	const response = await fetch(
-		process.env.BASE_URL! + `country,city?apiKey=${process.env.API_KEY}`,
+		`https://geo.ipify.org/api/v2/country,city?apiKey=at_LxxJAOaspMQk5orx900VzVcdKqwCF`,
 	);
 	const data = await response.json();
 	return {
 		data,
-		apiKey: process.env.API_KEY, // Pass the API key to the component
+		apiKey: 'at_LxxJAOaspMQk5orx900VzVcdKqwCF', // Pass the API key to the component
 	};
 };
 
