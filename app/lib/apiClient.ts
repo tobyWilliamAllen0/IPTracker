@@ -52,7 +52,6 @@ async function ApiClient(path: string, options: Options) {
 		}
 	} else {
 		fetchOptions.body = JSON.stringify(options.data);
-		fetchOptions.headers['Content-Type'] = 'application/json';
 		fetchOptions.headers['Accept'] = 'application/json';
 	}
 
