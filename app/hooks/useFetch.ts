@@ -4,21 +4,21 @@ import { Method } from 'axios';
 
 interface State {
 	isLoading: boolean;
-	error: any;
-	response: any;
+	error: unknown;
+	response: unknown;
 }
 
 interface Action {
 	type: 'FETCH_INIT' | 'FETCH_SUCCESS' | 'FETCH_FAILURE';
-	payload?: any;
+	payload?: unknown;
 }
 interface UseFetchAction {
-	onSuccess?: (res: any) => void;
-	onError?: (error: any) => void;
+	onSuccess?: (res: unknown) => void;
+	onError?: (error: unknown) => void;
 }
 interface Options extends RequestInit {
 	type?: 'formdata' | undefined;
-	data?: any;
+	data?: unknown;
 	headers?: any;
 	url: string;
 	method: Method;
@@ -62,7 +62,7 @@ function useFetch(
 			const res = await ApiClient(options.url, options);
 			action && action.onSuccess && action.onSuccess(res);
 			dispatch({ type: 'FETCH_SUCCESS', payload: res });
-		} catch (e: any) {
+		} catch (e: unknown) {
 			action && action.onError && action.onError(e);
 			dispatch({ type: 'FETCH_FAILURE', payload: e });
 		}

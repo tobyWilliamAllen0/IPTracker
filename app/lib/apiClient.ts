@@ -2,7 +2,7 @@ import { Method } from 'axios';
 
 function formatUrl(path: string) {
 	const adjustedPath = path[0] !== '/' ? `/${path}` : path;
-	return process.env.BASE_URL + adjustedPath;
+	return 'https://geo.ipify.org/api/v2' + adjustedPath;
 	// return adjustedPath
 }
 
@@ -16,9 +16,7 @@ async function checkStatus(response: Response) {
 
 async function parseJSON(response: Response) {
 	if (response && response.headers) {
-		if (
-			response.headers.get('Content-Type') === 'application/json; charset=UTF-8'
-		) {
+		if (response.headers.get('Content-Type') === 'application/json') {
 			return await response.json();
 		}
 		if (response.headers.get('Content-Type') === 'text/plain;charset=UTF-8') {

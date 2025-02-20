@@ -1,5 +1,6 @@
 import type { LatLngTuple } from 'leaflet';
-import { MapContainer, TileLayer, Marker } from 'react-leaflet';
+import { useEffect } from 'react';
+import { MapContainer, TileLayer, Marker, useMap } from 'react-leaflet';
 
 export function Map({
 	height,
@@ -24,8 +25,17 @@ export function Map({
 					attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 					url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
 				/>
-				<Marker position={position}></Marker>
+				<MapMarker position={position} />
 			</MapContainer>
 		</div>
 	);
 }
+
+const MapMarker = ({ position }: { position: LatLngTuple }) => {
+	const map = useMap();
+	useEffect(() => {
+		map.setView(position);
+	}, [map, position]);
+
+	return <Marker position={position}></Marker>;
+};
